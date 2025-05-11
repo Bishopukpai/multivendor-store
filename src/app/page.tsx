@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <p className="text-rose-500">
-        Hello world!
+         it is from me
       </p>
     </div>
   );
