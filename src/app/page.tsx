@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <p className="text-rose-500">
-         it is from me
+         I am in love with Uloma
       </p>
     </div>
   );
