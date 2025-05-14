@@ -27,11 +27,12 @@ const NavbarItem = ({
     isActive
 }: NavbarItemProps) => {
     return(
-        <Button asChild variant="elevated" className={cn("bg-green-400 text-white hover:bg-green-200 hover:text-green-500 rounded-full px-3.5 text-lg", isActive && "bg-green-200 text-green-700")}>
-            <Link href={href}>
-                {children}
-            </Link>
-        </Button>
+        null
+        //<Button asChild variant="elevated" className={cn("bg-green-400 text-white hover:bg-green-200 hover:text-green-500 rounded-full px-3.5 text-lg", isActive && "bg-green-200 text-green-700")}>
+            //<Link href={href}>
+                //{children}
+            //</Link>
+       // </Button>
     )
 }
 
