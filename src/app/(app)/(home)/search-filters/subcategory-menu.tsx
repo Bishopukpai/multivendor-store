@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { CustomeCategory } from "../types";
 
 interface Props {
-    category: Category;
+    category: CustomeCategory;
     isOpen: boolean;
     position: {top: number, left: number}
 }
@@ -26,7 +27,7 @@ export const SubcategoryMenu = ({
             <div style={{ backgroundColor }} className="w-60 text-white rounded-md overflow-hidden border shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -translate-x-[2px] -translate-y-[2px]">
                 <div>
                     {category.subcategories?.map((subcategory: Category) => (
-                        <Link key={subcategory.slug} href='/' className="w-full text-left p-4 hover:bg-green-200 hover:text-green-500 flex justify-between items-center underline font-medium">
+                        <Link key={subcategory.slug} href={`/${category.slug}/${subcategory.slug}`} className="w-full text-left p-4 hover:bg-green-200 hover:text-green-500 flex justify-between items-center underline font-medium">
                             {subcategory.name}
                         </Link>
                     ))}

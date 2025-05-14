@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 import { Footer } from "./footer";
 import { Navbar } from "./navbar";
 import { SearchFilters } from "./search-filters";
+import { CustomeCategory } from './types';
 
 interface Props {
     children: React.ReactNode;
@@ -22,9 +23,10 @@ const data = await payload.find({
         exists: false
       },
     },
+    sort: "name"
   });
 
-  const formattedData = data.docs.map((doc) => ({
+  const formattedData: CustomeCategory[] = data.docs.map((doc) => ({
     ...doc,
     subcategories: (doc.subcategories?.docs ?? []).map((doc) => ({
       ...doc,

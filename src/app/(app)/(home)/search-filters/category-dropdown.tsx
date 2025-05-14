@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
 import { useDropdownPosition } from "./use-dropdown-position";
 import { SubcategoryMenu } from "./subcategory-menu";
+import Link from "next/link";
 
 
 interface Props {
@@ -31,14 +32,24 @@ export const CategoryDropdown = ({
     const onMouseLeave = () => setIsOpen(false)
 
     const dropdownPosition = getDropdownPosition()
+
+    //potential improved mobile experience with this code
+    // const toggleDropdown = () => {
+    //     if (category.subcategories?.docs?.length){
+    //         setIsOpen(!isOpen)
+    //     }
+    // }
+
     return( 
-        <div className="relative" ref={dropdownRef} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <div className="relative" ref={dropdownRef} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} //onClick={toggleDropdown}
+        >
         <div className="relative">
-        <Button variant="elevated" className={cn(
-            "h-11 px-4 rounded-full",
-            isActive && !isNavigationHovered && "bg-white border-primary"
+        <Button variant="elevated" className={cn("h-11 px-4 rounded-full", isActive && !isNavigationHovered && "bg-white border border-green-500",
+            isOpen && "bg-white border-primary"
         )}>
-            {category.name}
+            <Link href={`/${category.slug === "all" ? "" : category.slug}`}> 
+              {category.name}
+            </Link>
         </Button>
         {category.subcategories && category.subcategories.length > 0 && (
             <div className={cn("opacity-0 absolute -bottom-3 w-0 h-0 border-l-[10px] border-r-[10px] border-b-[10px] border-l-transparent border-r-transparent border-b-black left-1/2 -translate-x-1/2",
