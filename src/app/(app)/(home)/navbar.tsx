@@ -70,12 +70,12 @@ export const Navbar = () => {
             {/** Home login and Register button */}
             <div className="hidden lg:flex">
                 <Button asChild variant="secondary" className="border-l text-green-600 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-green-600 hover:text-white text-lg">
-                    <Link href="/sign-in">
+                    <Link prefetch href="/sign-in">
                         LOG IN
                     </Link>
                 </Button>
                 <Button asChild className="border-l border-l-green-800 text-green-600 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-green-600 hover:text-white text-lg">
-                    <Link href="/sign-up">
+                    <Link prefetch href="/sign-up">
                        GET STARTED
                     </Link>
                 </Button>
