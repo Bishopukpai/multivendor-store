@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation";
 import { NavbarSidebar } from "./navbar-sidebar";
 import { useState } from "react";
 import { MenuIcon } from "lucide-react";
+import { useTRPC } from "@/trpc/client";
+import { useQuery } from "@tanstack/react-query";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -49,6 +51,9 @@ export const Navbar = () => {
 
     {/** State for opening and closing the sidebar component */}
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+    const trpc = useTRPC()
+    const session = useQuery(trpc.auth.session.queryOptions());
     return (
         <nav className="h-20 flex border-b justify-between font-medium bg-white">
 
@@ -66,20 +71,29 @@ export const Navbar = () => {
                         </NavbarItem>
                     ))}
             </div>
-
-            {/** Home login and Register button */}
-            <div className="hidden lg:flex">
-                <Button asChild variant="secondary" className="border-l text-green-600 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-green-600 hover:text-white text-lg">
-                    <Link prefetch href="/sign-in">
-                        LOG IN
-                    </Link>
-                </Button>
-                <Button asChild className="border-l border-l-green-800 text-green-600 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-green-600 hover:text-white text-lg">
-                    <Link prefetch href="/sign-up">
-                       GET STARTED
-                    </Link>
-                </Button>
-            </div>
+                {
+                    session.data?.user ? (
+                        <div className="hidden lg:flex">
+                          <Button asChild variant="secondary" className="border-l text-green-600 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-green-600 hover:text-white text-lg">
+                            <Link href="/admin">
+                               Dashboard
+                            </Link>
+                           </Button>
+                        </div>
+                    ): (
+                   <div className="hidden lg:flex">
+                     <Button asChild variant="secondary" className="border-l text-green-600 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-green-600 hover:text-white text-lg">
+                       <Link prefetch href="/sign-in">
+                          LOG IN
+                        </Link>
+                      </Button>
+                      <Button asChild className="border-l border-l-green-800 text-green-600 border-t-0 border-b-0 border-r-0 px-12 h-full rounded-none bg-white hover:bg-green-600 hover:text-white text-lg">
+                         <Link prefetch href="/sign-up">
+                            GET STARTED
+                         </Link>
+                      </Button>
+                     </div>
+                )}
 
             <div className="flex lg:hidden items-center justify-center">
                 <Button variant="ghost" className="size-12 border-transparent bg-white" onClick={() => setIsSidebarOpen(true)}>
